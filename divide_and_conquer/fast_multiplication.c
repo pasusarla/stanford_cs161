@@ -34,53 +34,53 @@ void karatsuba_mult(mpz_t res, mpz_t first, mpz_t second) {
     size_second = strlen(_second);
 
     if (size_first == size_second) {
-	    memcpy(_a, _first, size_first/2 + size_first%2);
-	    _a[size_first/2 + size_first%2] = '\0';
-	    mpz_init_set_str(a, _a, 10);
+        memcpy(_a, _first, size_first/2 + size_first%2);
+        _a[size_first/2 + size_first%2] = '\0';
+        mpz_init_set_str(a, _a, 10);
 
-	    memcpy(_b, _first + size_first/2 + size_first%2, size_first/2);
-	    _b[size_first/2] = '\0';
-	    mpz_init_set_str(b, _b, 10);
+        memcpy(_b, _first + size_first/2 + size_first%2, size_first/2);
+        _b[size_first/2] = '\0';
+        mpz_init_set_str(b, _b, 10);
 
-	    memcpy(_c, _second, size_second/2 + size_second%2);
-	    _c[size_second/2 + size_second%2] = '\0';
-	    mpz_init_set_str(c, _c, 10);
+        memcpy(_c, _second, size_second/2 + size_second%2);
+        _c[size_second/2 + size_second%2] = '\0';
+        mpz_init_set_str(c, _c, 10);
 
-	    memcpy(_d, _second + size_second/2 + size_second%2, size_second/2);
-	    _d[size_second/2] = '\0';
-	    mpz_init_set_str(d, _d, 10);
+        memcpy(_d, _second + size_second/2 + size_second%2, size_second/2);
+        _d[size_second/2] = '\0';
+        mpz_init_set_str(d, _d, 10);
     } else if (size_first > size_second) {
-	    memcpy(_a, _first, size_first/2 + size_first%2);
-	    _a[size_first/2 + size_first%2] = '\0';
-	    mpz_init_set_str(a, _a, 10);
+        memcpy(_a, _first, size_first/2 + size_first%2);
+        _a[size_first/2 + size_first%2] = '\0';
+        mpz_init_set_str(a, _a, 10);
 
-	    memcpy(_b, _first + size_first/2 + size_first%2, size_first/2);
-	    _b[size_first/2] = '\0';
-	    mpz_init_set_str(b, _b, 10);
+        memcpy(_b, _first + size_first/2 + size_first%2, size_first/2);
+        _b[size_first/2] = '\0';
+        mpz_init_set_str(b, _b, 10);
 
-	    memcpy(_c, _second, size_second/2);
-	    _c[size_second/2] = '\0';
-	    mpz_init_set_str(c, _c, 10);
+        memcpy(_c, _second, size_second/2);
+        _c[size_second/2] = '\0';
+        mpz_init_set_str(c, _c, 10);
 
-	    memcpy(_d, _second + size_second/2, size_second/2 + size_second%2);
-	    _d[size_second/2 + size_second%2] = '\0';
-	    mpz_init_set_str(d, _d, 10);
+        memcpy(_d, _second + size_second/2, size_second/2 + size_second%2);
+        _d[size_second/2 + size_second%2] = '\0';
+        mpz_init_set_str(d, _d, 10);
     } else {
-	    memcpy(_a, _first, size_first/2);
-	    _a[size_first/2] = '\0';
-	    mpz_init_set_str(a, _a, 10);
+        memcpy(_a, _first, size_first/2);
+        _a[size_first/2] = '\0';
+        mpz_init_set_str(a, _a, 10);
 
-	    memcpy(_b, _first + size_first/2, size_first/2 + size_first%2);
-	    _b[size_first/2 + size_first%2] = '\0';
-	    mpz_init_set_str(b, _b, 10);
+        memcpy(_b, _first + size_first/2, size_first/2 + size_first%2);
+        _b[size_first/2 + size_first%2] = '\0';
+        mpz_init_set_str(b, _b, 10);
 
-	    memcpy(_c, _second, size_second/2 + size_second%2);
-	    _c[size_second/2 + size_second%2] = '\0';
-	    mpz_init_set_str(c, _c, 10);
+        memcpy(_c, _second, size_second/2 + size_second%2);
+        _c[size_second/2 + size_second%2] = '\0';
+        mpz_init_set_str(c, _c, 10);
 
-	    memcpy(_d, _second + size_second/2 + size_second%2, size_second/2);
-	    _d[size_second/2] = '\0';
-	    mpz_init_set_str(d, _d, 10);
+        memcpy(_d, _second + size_second/2 + size_second%2, size_second/2);
+        _d[size_second/2] = '\0';
+        mpz_init_set_str(d, _d, 10);
     }
 
 #ifdef DEBUG
@@ -141,10 +141,10 @@ int main() {
     printf("%d\n", gmp_scanf("%Zd", b));
 
     karatsuba_mult(res, a, b);
-    gmp_printf("The result with the Karatsuba method is        %Zd.\n", res);
+    gmp_printf("The result with the Karatsuba method is          %Zd.\n", res);
 #ifdef DEBUG
     mpz_mul(res, a, b);
-    gmp_printf("The result of the built-in library function is %Zd.\n", res);
+    gmp_printf("The result with the built-in library function is %Zd.\n", res);
 #endif
 
     return 0;

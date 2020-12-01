@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+//#define DEBUG
 #define size 100000
 
 int array[size];
 int temp[size];
 
-int count_split_inversions(int start, int end) {
-    int i, j, k, split_inversion_count;
+unsigned long long count_split_inversions(int start, int end) {
+    int i, j, k;
+    unsigned long long split_inversion_count;
 
     split_inversion_count = 0;
     for (i = start, j = (start + end)/2 + 1, k = start; i <= (start + end)/2 && j <= end; k++) {
@@ -33,8 +35,9 @@ int count_split_inversions(int start, int end) {
     return split_inversion_count;
 }
 
-int sort_and_count(int start, int end) {
-    int l, r, s;
+unsigned long long sort_and_count(int start, int end) {
+    unsigned long long l, r, s;
+
     if (start >= end) return 0;
 
     l = sort_and_count(start, (start + end)/2);
@@ -44,27 +47,47 @@ int sort_and_count(int start, int end) {
     return l + r + s;
 }
 
-int main() {
-    int i, total;
-    FILE *fp;
-    char * line = NULL;
+int main(int argc, char **argv) {
+    int i;
+    unsigned long long total;
+    FILE *fp = NULL;
+    char *line = NULL;
     size_t len = 0;
     ssize_t read;
+    char *filename;
 
-    fp = fopen("numbers", "r");
-    if (fp == NULL) exit(EXIT_FAILURE);
-
-    i = 0;
-    while ((read = getline(&line, &len, fp)) != -1) {
-        printf("Retrieved line of length %zu:\n", read);
-        printf("%s", line);
-        array[i++] = atoi(line);
+    if (argc == 2) {
+        filename = (char *)malloc(sizeof(char) * strlen(argv[1]));
+        filename = argv[1];
+    } else {
+        filename = (char *)malloc(sizeof(char) * 8);
+        filename = "numbers";
     }
 
-    fclose(fp);
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        array[0] = 1;
+        array[1] = 3;
+        array[2] = 5;
+        array[3] = 2;
+        array[4] = 4;
+        array[5] = 6;
+        i = 6;
+    } else {
+        i = 0;
+        while ((read = getline(&line, &len, fp)) != -1) {
+#ifdef DEBUG
+            printf("Retrieved line of length %zu:\n", read);
+            printf("%s", line);
+#endif
+            array[i++] = atoi(line);
+        }
+
+        fclose(fp);
+    }
 
     total = sort_and_count(0, i - 1);
+    printf("Number of inversions: %Lu.\n", total);
 
-    printf("Number of inversions: %d.\n", total);
     return 0;
 }
